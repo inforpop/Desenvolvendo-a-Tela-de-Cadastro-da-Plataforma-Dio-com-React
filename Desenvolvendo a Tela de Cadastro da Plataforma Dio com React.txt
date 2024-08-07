@@ -1,0 +1,136 @@
+PASSO A PASSO:
+Para desenvolver uma tela de cadastro usando React, você pode seguir esses passos básicos:
+
+### 1. Configuração do Projeto
+
+Primeiro, certifique-se de que você tem o Node.js instalado. Em seguida, crie um novo projeto React usando o Create React App:
+
+```bash
+npx create-react-app dio-cadastro
+cd dio-cadastro
+npm start
+```
+
+### 2. Estrutura do Projeto
+
+Crie uma estrutura de diretórios para organizar melhor seu código. Por exemplo:
+
+```
+src/
+|-- components/
+|   |-- CadastroForm.js
+|-- App.js
+|-- index.js
+```
+
+### 3. Criando o Formulário de Cadastro
+
+Crie o componente `CadastroForm.js` dentro da pasta `components`:
+
+```jsx
+import React, { useState } from 'react';
+
+const CadastroForm = () => {
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    senha: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Dados do formulário:', formData);
+    // Aqui você pode adicionar a lógica para enviar os dados para um servidor
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Nome:</label>
+        <input type="text" name="nome" value={formData.nome} onChange={handleChange} required />
+      </div>
+      <div>
+        <label>Email:</label>
+        <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+      </div>
+      <div>
+        <label>Senha:</label>
+        <input type="password" name="senha" value={formData.senha} onChange={handleChange} required />
+      </div>
+      <button type="submit">Cadastrar</button>
+    </form>
+  );
+};
+
+export default CadastroForm;
+```
+
+### 4. Integração com o Componente Principal
+
+No arquivo `App.js`, importe e utilize o componente `CadastroForm`:
+
+```jsx
+import React from 'react';
+import CadastroForm from './components/CadastroForm';
+
+const App = () => {
+  return (
+    <div className="App">
+      <h1>Cadastro na Plataforma Dio</h1>
+      <CadastroForm />
+    </div>
+  );
+};
+
+export default App;
+```
+
+### 5. Estilização
+
+Você pode adicionar algumas estilizações básicas no arquivo `App.css` ou criar um arquivo CSS separado:
+
+```css
+.App {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+label {
+  margin-right: 10px;
+}
+```
+
+### 6. Executando o Projeto
+
+Certifique-se de que o servidor de desenvolvimento esteja rodando:
+
+```bash
+npm start
+```
+
+Agora, ao acessar `http://localhost:3000`, você deve ver a tela de cadastro funcionando.
+
+### Passos Adicionais
+
+- **Validação de Formulário**: Você pode adicionar validação adicional aos campos de formulário.
+- **Integração com Backend**: Adicione a lógica para enviar os dados para um servidor backend usando fetch ou axios.
+- **Gerenciamento de Estado**: Considere usar uma biblioteca como Redux para gerenciar o estado global da aplicação se ela se tornar mais complexa.
+
+Essa é uma base para criar uma tela de cadastro com React. A partir daqui, você pode personalizar e expandir conforme as necessidades do seu projeto.
